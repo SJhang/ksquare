@@ -8,8 +8,12 @@ const Checkbox = ({ user, email, onChange }) => {
         type="checkbox"
         />
       <div className="chb-info">
-        <span>NAME : {user}</span>
-        <span>EMAIL : {email}</span>
+        <span>
+          <h4>{user}</h4>
+        </span>
+        <span>
+          <h4>{email}</h4>
+        </span>
       </div>
     </div>
   )

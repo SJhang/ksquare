@@ -10877,14 +10877,20 @@ var Checkbox = function Checkbox(_ref) {
       _react2.default.createElement(
         "span",
         null,
-        "NAME : ",
-        user
+        _react2.default.createElement(
+          "h4",
+          null,
+          user
+        )
       ),
       _react2.default.createElement(
         "span",
         null,
-        "EMAIL : ",
-        email
+        _react2.default.createElement(
+          "h4",
+          null,
+          email
+        )
       )
     )
   );
@@ -10893,45 +10899,7 @@ var Checkbox = function Checkbox(_ref) {
 exports.default = Checkbox;
 
 /***/ }),
-/* 87 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(32);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Results = function Results(_ref) {
-  var name = _ref.name,
-      email = _ref.email;
-
-  return _react2.default.createElement(
-    "div",
-    { className: "chb-info" },
-    _react2.default.createElement(
-      "span",
-      null,
-      name
-    ),
-    _react2.default.createElement(
-      "span",
-      null,
-      email
-    )
-  );
-};
-
-exports.default = Results;
-
-/***/ }),
+/* 87 */,
 /* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10988,9 +10956,13 @@ var _checkbox = __webpack_require__(86);
 
 var _checkbox2 = _interopRequireDefault(_checkbox);
 
-var _results = __webpack_require__(87);
+var _result = __webpack_require__(163);
 
-var _results2 = _interopRequireDefault(_results);
+var _result2 = _interopRequireDefault(_result);
+
+var _jquery = __webpack_require__(105);
+
+var _jquery2 = _interopRequireDefault(_jquery);
 
 var _utils = __webpack_require__(88);
 
@@ -11095,11 +11067,13 @@ var Root = function (_React$Component) {
     key: 'renderResults',
     value: function renderResults() {
       var results = [];
+      var idx = 0;
       if (this.state.results) {
         for (var key in this.state.results) {
           var name = key;
           var email = this.state.results[key];
-          results.push(_react2.default.createElement(_results2.default, { key: email.length, name: name, email: email }));
+          idx++;
+          results.push(_react2.default.createElement(_result2.default, { key: idx, name: name, email: email }));
         };
         return results;
       } else {
@@ -11123,14 +11097,22 @@ var Root = function (_React$Component) {
       var email = user[1];
       if (this.selectedCheckBoxes[name]) {
         delete this.selectedCheckBoxes[name];
+        e.target.nextSibling.style.background = "#95B8D1";
       } else {
         this.selectedCheckBoxes[name] = email;
+        e.target.nextSibling.style.background = "#809BCE";
       }
     }
   }, {
     key: 'handleClick',
-    value: function handleClick(e) {
+    value: function handleClick() {
       this.setState({ results: this.selectedCheckBoxes });
+      (0, _jquery2.default)("#root").toggleClass('toggled');
+    }
+  }, {
+    key: 'handleResultClick',
+    value: function handleResultClick(e) {
+      (0, _jquery2.default)("#root").toggleClass('toggled');
     }
   }, {
     key: 'render',
@@ -11152,8 +11134,7 @@ var Root = function (_React$Component) {
         ),
         _react2.default.createElement(
           'button',
-          {
-            className: 'confirm',
+          { className: 'confirm',
             onClick: function onClick() {
               return _this4.handleClick();
             } },
@@ -11162,7 +11143,35 @@ var Root = function (_React$Component) {
         _react2.default.createElement(
           'div',
           { className: 'result-list' },
-          this.renderResults()
+          _react2.default.createElement(
+            'div',
+            { className: 'list-title' },
+            _react2.default.createElement(
+              'h3',
+              null,
+              'Selected Names'
+            ),
+            _react2.default.createElement('i', {
+              className: 'fa fa-times',
+              'aria-hidden': 'true',
+              onClick: function onClick(e) {
+                return _this4.handleResultClick(e);
+              } })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'list-wrapper' },
+            this.renderResults()
+          )
+        ),
+        _react2.default.createElement(
+          'footer',
+          null,
+          _react2.default.createElement(
+            'h2',
+            null,
+            'Built By Sonik Jhang'
+          )
         )
       );
     }
@@ -30503,6 +30512,44 @@ module.exports = quoteAttributeValueForBrowser;
 var ReactMount = __webpack_require__(5);
 
 module.exports = ReactMount.renderSubtreeIntoContainer;
+
+/***/ }),
+/* 163 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(32);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Result = function Result(_ref) {
+  var name = _ref.name,
+      email = _ref.email;
+
+  return _react2.default.createElement(
+    "div",
+    { className: "chb-info" },
+    _react2.default.createElement(
+      "span",
+      null,
+      _react2.default.createElement(
+        "h4",
+        null,
+        name
+      )
+    )
+  );
+};
+
+exports.default = Result;
 
 /***/ })
 /******/ ]);

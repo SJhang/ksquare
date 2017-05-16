@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 
 // stateless components for more readable code
 import Checkbox from './checkbox';
-import Results from './results';
+import Result from './result';
+import $ from 'jquery';
 
 // ajax call
 import { fetchUsers } from './utils';
@@ -73,12 +74,14 @@ class Root extends React.Component {
 
   renderResults() {
     let results = [];
+    let idx = 0;
     if (this.state.results) {
       for (var key in this.state.results) {
         let name = key;
         let email = this.state.results[key];
+        idx++;
         results.push(
-          <Results key={email.length} name={name} email={email} />
+          <Result key={idx} name={name} email={email} />
         );
       };
       return results;
@@ -98,13 +101,20 @@ class Root extends React.Component {
     let email = user[1];
     if (this.selectedCheckBoxes[name]) {
       delete this.selectedCheckBoxes[name];
+      e.target.nextSibling.style.background = "#95B8D1";
     } else {
       this.selectedCheckBoxes[name] = email;
+      e.target.nextSibling.style.background = "#809BCE";
     }
   }
 
-  handleClick(e) {
+  handleClick() {
     this.setState({ results: this.selectedCheckBoxes });
+    $("#root").toggleClass('toggled');
+  }
+
+  handleResultClick(e) {
+    $("#root").toggleClass('toggled')
   }
 
   render() {
@@ -114,12 +124,21 @@ class Root extends React.Component {
         <div className="chb-list">
           {this.renderCheckboxes()}
         </div>
-        <button
-          className="confirm"
+        <button className="confirm"
           onClick={() => this.handleClick()}>Confirm</button>
         <div className="result-list">
-          {this.renderResults()}
+          <div className="list-title">
+            <h3>Selected Names</h3>
+            <i
+              className="fa fa-times"
+              aria-hidden="true"
+              onClick={(e) => this.handleResultClick(e)}></i>
+          </div>
+          <div className="list-wrapper">
+            {this.renderResults()}
+          </div>
         </div>
+        <footer><h2>Built By Sonik Jhang</h2></footer>
       </div>
     );
   }
