@@ -1,16 +1,16 @@
-.chb-list {
+.chb-list{
   font-size: 1rem;
   display: flex;
   flex-direction: column;
   padding: 5px;
-}
 
-.chb-list div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin-bottom: 5px;
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 5px;
+  }
 }
 
 .chb-button {
@@ -27,16 +27,18 @@
   box-shadow: 4px 4px 14px 0px rgba(50, 50, 50, 0.56);
 }
 
-.chb-info span {
-  width: 100%;
-}
+.chb-info {
+  span {
+    width: 100%;
 
-.chb-info span:last-child {
-  background: #6D9DC5;
-}
+    &:last-child {
+      background: #6D9DC5;
+    }
+  }
 
-.chb-info h4 {
-  margin: 5px 10px;
-  font-weight: 200;
-  font-size: 0.9rem;
+  h4 {
+    margin: 5px 10px;
+    font-weight: 200;
+    font-size: 0.9rem;
+  }
 }
