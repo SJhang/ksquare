@@ -9,9 +9,6 @@ import $ from 'jquery';
 // ajax call
 import { fetchUsers } from './utils';
 
-//sass import
-require('../stylesheets/application.scss');
-
 class Root extends React.Component {
   constructor(props) {
     super(props);
